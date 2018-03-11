@@ -1,7 +1,9 @@
 //********** DEFINE IN MEMORY **********/
 Block whiteBlock;
-UIScreen uiLayout;
+UILAYOUT uiScreen;
+SCORE displayScore;
 int[][] playArea;
+
 
 //********** VARIABLES **********/
 // 0 is for the Initial Screen
@@ -21,7 +23,8 @@ void setup () {
   final int BOARD_WIDTH = 600;
   final int BOARD_HEIGHT = 1000;
   final int TILE_LENGTH = 50;
-  uiLayout = new UIScreen();
+  uiScreen = new UILAYOUT();
+  displayScore = new SCORE();
   final int TILES_PER_ROW = BOARD_WIDTH / TILE_LENGTH; // 600 / 50 == 12
   final int TILES_PER_COLUMN = BOARD_HEIGHT / TILE_LENGTH; // 1000 / 50 = 20
   playArea = new int[TILES_PER_COLUMN][TILES_PER_ROW];
@@ -73,7 +76,10 @@ void gameScreen() {
   rect(0,0,750,1000);
   whiteBlock.paint();
   whiteBlock.moveRight();
-  uiLayout.paint();
+  uiScreen.paint();
+  displayScore.paint();
+  textFont(f, 32);
+  text(
 }
 void gameOverScreen() {
   //codes of game over screen
@@ -114,17 +120,32 @@ class Block {
   }
 }
 
-class UIScreen {
- float xPos, yPos, w,h;
- UIScreen() {
+class UILAYOUT {
+ float xPos, yPos, layoutWidth, layoutHeight;
+ UILAYOUT() {
   this.xPos = 487.5;
   this.yPos = 0;
-  this.w = width - this.xPos;
-  this.h = 1000;
+  this.layoutWidth = width - this.xPos;
+  this.layoutHeight = 1000;
  }
  
  void paint() {
-  fill(255);
-  rect(this.xPos,this.yPos,this.w,this.h);
+  fill(102, 255, 255);
+  rect(this.xPos, this.yPos, this.layoutWidth ,this.layoutHeight);
  }
+}
+
+class SCORE {
+  float xPos, yPos, scoreWidth, scoreHeight;
+  SCORE() {
+    this.xPos = 550;
+    this.yPos = 50;
+    this.scoreWidth = 150;
+    this.scoreHeight = 50;
+  }
+  
+  void paint() {
+    fill(255);
+    rect(this.xPos, this.yPos, this.scoreWidth, this.scoreHeight);
+  }
 }
