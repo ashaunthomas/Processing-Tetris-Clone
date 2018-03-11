@@ -1,5 +1,6 @@
 //********** DEFINE IN MEMORY **********/
 Block whiteBlock;
+int[][] playArea;
 
 //********** VARIABLES **********/
 // 0 is for the Initial Screen
@@ -16,7 +17,27 @@ void setup () {
   bg = loadImage("Greninjajpg.jpg");
   whiteBlock = new Block(3);
   f = createFont ("Arial", 16, true);
-} 
+  final int BOARD_WIDTH = 600;
+  final int BOARD_HEIGHT = 1000;
+  final int TILE_LENGTH = 50;
+  final int TILES_PER_ROW = BOARD_WIDTH / TILE_LENGTH; // 600 / 50 == 12
+  final int TILES_PER_COLUMN = BOARD_HEIGHT / TILE_LENGTH; // 1000 / 50 = 20
+  playArea = new int[TILES_PER_COLUMN][TILES_PER_ROW];
+  
+  for (int i = 0; i < TILES_PER_COLUMN; i++) {
+    for (int j = 0; j < TILES_PER_ROW;j++) {
+      playArea[i][j] = 0;
+      println("play Area [" + i + "][" + j + "] is set to 0");
+    }
+  }
+}
+
+  
+  /*
+     width of board is 600
+     each tile then is 50 wide and long
+  */
+  
 
 
 
@@ -89,8 +110,3 @@ class Block {
     rect(this.xPos, this.yPos, this.blockWidth, this.blockHeight);
   }
 }
-
-//fill(0);
-//rect(0,0,750,1000);
-//whiteBlock.paint();
-//whiteBlock.moveRight();
