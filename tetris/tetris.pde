@@ -16,7 +16,7 @@ void setup () {
   bg = loadImage("Greninjajpg.jpg");
   whiteBlock = new Block(3);
   f = createFont ("Arial", 16, true);
-}
+} 
 
 
 
@@ -90,14 +90,7 @@ class Block {
   }
 }
 
-<<<<<<< HEAD
-class Tile {
-   int x,y,w,h;
-}
-=======
-//******** part of the draw in canvas block/
 //fill(0);
 //rect(0,0,750,1000);
 //whiteBlock.paint();
 //whiteBlock.moveRight();
->>>>>>> e14e241ed7f8b4a686bbef85dfcfec8d60037314
