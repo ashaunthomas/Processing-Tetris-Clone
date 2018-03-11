@@ -22,12 +22,12 @@ void setup () {
   final int TILE_LENGTH = 50;
   final int TILES_PER_ROW = BOARD_WIDTH / TILE_LENGTH;
   final int TILES_PER_COLUMN = BOARD_HEIGHT / TILE_LENGTH;
-  playArea = new int[TILES_PER_COLUMN][TILES_PER_ROW];
+  playArea = new int[TILES_PER_ROW][TILES_PER_COLUMN];
   
   for (int i = 0; i < TILES_PER_COLUMN; i++) {
-    //grab row 0...
     for (int j = 0; i < TILES_PER_ROW; j++) {
        playArea[i][j] = 0;
+       println("play Area [" + i + "][" + j + "] is set to 0");
     }
   }
 
