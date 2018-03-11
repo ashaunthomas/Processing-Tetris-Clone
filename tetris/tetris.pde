@@ -42,3 +42,7 @@ class Block {
     rect(this.xPos,this.yPos,this.blockWidth,this.blockHeight);
   }
 }
+
+class Tile {
+   int x,y,w,h;
+}
