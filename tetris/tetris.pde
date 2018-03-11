@@ -12,7 +12,7 @@ PImage bg;
 //********** IMPLEMENT OBJECTS **********/
 void setup () {
   size (750, 1000);
-  bg = loadImage("40972381.jpg");
+  bg = loadImage("Greninjajpg.jpg");
   whiteBlock = new Block(3);
 }
 
