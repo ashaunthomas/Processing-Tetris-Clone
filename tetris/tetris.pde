@@ -110,8 +110,3 @@ class Block {
     rect(this.xPos, this.yPos, this.blockWidth, this.blockHeight);
   }
 }
-
-//fill(0);
-//rect(0,0,750,1000);
-//whiteBlock.paint();
-//whiteBlock.moveRight();
