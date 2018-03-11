@@ -8,12 +8,14 @@ Block whiteBlock;
 
 int gameScreen = 0;
 PImage bg;
+PFont f;
 
 //********** IMPLEMENT OBJECTS **********/
 void setup () {
   size (750, 1000);
   bg = loadImage("Greninjajpg.jpg");
   whiteBlock = new Block(3);
+  f = createFont ("Arial", 16, true);
 }
 
 
@@ -23,6 +25,10 @@ void draw() {
   // Displays the contents of the current screen
   if (gameScreen == 0) {
     initScreen();
+    textFont(f, 56);
+    fill(0);
+    text("Welcome to Our Future", 375, 500);
+    text("Click anywhere to start", 375, 600);
   } else if (gameScreen == 1) {
     gameScreen();
   } else if (gameScreen == 2) {
