@@ -1,7 +1,8 @@
 //********** DEFINE IN MEMORY **********/
-Block whiteBlock;
-UIScreen uiLayout;
 PlayArea playArea;
+UILAYOUT uiScreen;
+SCORE displayScore;
+
 
 //********** VARIABLES **********/
 // 0 is for the Initial Screen
@@ -16,24 +17,16 @@ PFont f;
 void setup () {
   size (750, 1000);
   bg = loadImage("Greninjajpg.jpg");
-  whiteBlock = new Block(3);
   f = createFont ("Arial", 16, true);
   final int BOARD_WIDTH = 525;
   final int BOARD_HEIGHT = 875;
   final int TILE_LENGTH = 35;
-  uiLayout = new UIScreen();
   final int TILES_PER_ROW = BOARD_WIDTH / TILE_LENGTH; // 525 / 35 == 15
   final int TILES_PER_COLUMN = BOARD_HEIGHT / TILE_LENGTH; // 875 / 35 = 25
   playArea = new PlayArea(TILES_PER_ROW,TILES_PER_COLUMN,TILE_LENGTH);
+  uiScreen = new UILAYOUT();
+  displayScore = new SCORE();
 }
-
-  
-  /*
-     width of board is 600
-     each tile then is 50 wide and long
-  */
-  
-
 
 
 //*********** DRAW IN CANVAS **********/
@@ -64,11 +57,13 @@ void gameScreen() {
   // Next blocks will test movement of tile
   fill(0);
   rect(0,0,750,1000);
-  whiteBlock.paint();
-  whiteBlock.moveRight();
-  uiLayout.paint();
   playArea.drawGrid();
+  uiScreen.paint();
+  displayScore.paint();
+  textFont(f, 32);
+  text("FUCKIN SCORE",100,100);
 }
+
 void gameOverScreen() {
   //codes of game over screen
 }
@@ -88,40 +83,22 @@ void startGame() {
 }
 
 //********** CLASSES ***********/
-class Block {
-  float xPos, yPos, blockWidth, blockHeight;
-  boolean hitRightSide = false;
-  Block(int placement) {
-    this.xPos = placement;
-    this.yPos = 20;
-    this.blockHeight = 20;
-    this.blockWidth = this.blockHeight;
-  }
 
-  void moveRight() {
-    this.xPos+=3;
-  }
 
-  void paint() {
-    fill(#ff0000); //red
-    rect(this.xPos, this.yPos, this.blockWidth, this.blockHeight);
-  }
-}
-
-class UIScreen {
- float xPos, yPos, w,h;
- UIScreen() {
-  this.xPos = 525;
-  this.yPos = 0;
-  this.w = width - this.xPos;
-  this.h = 1000;
+class UILAYOUT {
+ float xPos, yPos, layoutWidth, layoutHeight;
+   UILAYOUT() {
+     this.xPos = 487.5;
+     this.yPos = 0;
+     this.layoutWidth = width - this.xPos;
+     this.layoutHeight = 1000;
  }
- 
  
  void paint() {
-  fill(255);
-  rect(this.xPos,this.yPos,this.w,this.h);
+  fill(102, 255, 255);
+  rect(this.xPos, this.yPos, this.layoutWidth ,this.layoutHeight);
  }
+ 
 }
 
 class PlayArea {
@@ -159,5 +136,19 @@ class PlayArea {
           }
 
    }
-   
+}
+
+class SCORE {
+  float xPos, yPos, scoreWidth, scoreHeight;
+  SCORE() {
+    this.xPos = 550;
+    this.yPos = 50;
+    this.scoreWidth = 150;
+    this.scoreHeight = 50;
+  }
+  
+  void paint() {
+    fill(255);
+    rect(this.xPos, this.yPos, this.scoreWidth, this.scoreHeight);
+  }
 }
