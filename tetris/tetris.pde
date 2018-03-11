@@ -1,23 +1,26 @@
 
 
 // DEFINE IN MEMORY
-Block whiteBlock; 
+Block whiteBlock;
+
+
 
 
 
 
 //IMPLEMENT OBJECTS
 void setup () {
-  size (640, 360);
+  size (750, 1000);
   background (102);
   whiteBlock = new Block(3);
 }
 
 
+
 //DRAW IN CANVAS
 void draw() {
-  fill(255);
-  rect(0,0,640,360);
+  fill(0);
+  rect(0,0,750,1000);
   whiteBlock.paint();
   whiteBlock.moveRight();
 }
@@ -28,8 +31,8 @@ class Block {
   boolean hitRightSide = false;
   Block(int placement) {
     this.xPos = placement;
-    this.yPos = 40;
-    this.blockHeight = 10;
+    this.yPos = 20;
+    this.blockHeight = 20;
     this.blockWidth = this.blockHeight;
   }
   
