@@ -28,6 +28,7 @@ void draw() {
     textFont(f, 56);
     fill(0);
     text("Welcome to Our Future", 375, 500);
+    textFont(f,32);
     text("Click anywhere to start", 375, 600);
   } else if (gameScreen == 1) {
     gameScreen();
