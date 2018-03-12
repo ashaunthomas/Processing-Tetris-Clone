@@ -65,6 +65,7 @@ void gameScreen() {
   fill(0);
   rect(0,0,750,1000);
   playArea.drawGrid();
+  playArea.addSquare(2,1);
   uiScreen.paint();
   displayScore.paint();
   textFont(f, 32);
@@ -97,6 +98,7 @@ public void mousePressed() {
 void startGame() {
   gameScreen = 1;
 }
+
 
 //********** CLASSES ***********/
 
@@ -149,10 +151,36 @@ class PlayArea {
       for (int i = 0; i < this.numBoxesInRow; i++) {
         for (int j = 0; j < this.numBoxesInColumn; j++) {
           logic[i][j].paint();
-          logic[i][j].toggle();
         }
         
       }
+   }
+   
+   void addSquare(int col, int row) {
+     int shapeWidth = 2;
+     int shapeHeight = 2;
+     int rowTemp = row, colTemp = col;
+     if (col > this.numBoxesInRow || col < -1) {
+       println("ERROR IN ADDSQUARE FUNCTION: OUT OF DOMAIN"); 
+     }
+     else if (row < 0 || row > this.numBoxesInColumn) {
+       println("ERROR IN ADDSQUARE FUNCTION: OUT OF RANGE"); 
+     }
+     else {
+       for (int i = 0; i < shapeHeight; i++) {
+         for (int j = 0; j < shapeWidth; j++) {
+           logic[colTemp][rowTemp].setOccupied();
+           rowTemp++;
+         } 
+         rowTemp = row;
+         colTemp++;
+       } 
+     }
+   }
+   
+   void addLine(int col, int row) {
+     int shapeWidth = 1;
+     int shapeHeight = 4;
    }
 }
 
@@ -166,8 +194,12 @@ class Tile {
       this.isOccupied = false;
    }
    
-   void toggle() {
-     isOccupied = !isOccupied;
+   void setOccupied() {
+     isOccupied = true; 
+   }
+   
+   void setUnoccupied() {
+      isOccupied = false; 
    }
    
    void paint() {
