@@ -118,10 +118,12 @@ class UILAYOUT {
 }
 
 class PlayArea {
-  int[][] logic;
+  Tile[][] logic;
   int numBoxesInRow, numBoxesInColumn, tileSize;
     PlayArea(int numBoxesInRow, int numBoxesInColumn,int tileSize) {
-     logic = new int[numBoxesInRow][numBoxesInColumn]; 
+     int x = 0;
+     int y = 0;
+     logic = new Tile[numBoxesInRow][numBoxesInColumn]; 
      this.numBoxesInRow = numBoxesInRow;
      this.numBoxesInColumn = numBoxesInColumn;
      this.tileSize = tileSize;
@@ -129,33 +131,52 @@ class PlayArea {
      println("Column size is " + this.numBoxesInRow);
      for (int i = 0; i < this.numBoxesInRow; i++) {
        for (int j = 0; j < this.numBoxesInColumn; j++) {
-         logic[i][j] = 0;
-         println("logic item [" + i + "][" + j + "] is set to 0");
+         logic[i][j] = new Tile(x,y);
+         x+=tileSize;
         }
-      }   
+        x = 0;
+        y+=tileSize;
+      }
     }
  
-   int[][] getLogic() { return this.logic; }
+   Tile[][] getLogic() { return this.logic; }
    
    void addNewBar() {
      
    }
    
    void drawGrid() {
-      int x = 0;
-      int y = 0;
-      fill(255);
-        for (int i = 0; i < this.numBoxesInRow; i++) {
-          for (int j = 0; j < this.numBoxesInColumn; j++) {
-            rect(x,y,tileSize,tileSize);
-            x+=tileSize;
-          }
-          x = 0;
-          y+=tileSize;
+      for (int i = 0; i < this.numBoxesInRow; i++) {
+        for (int j = 0; j < this.numBoxesInColumn; j++) {
+          logic[i][j].paint();
+          logic[i][j].toggle();
         }
+        
+      }
    }
 }
 
+class Tile {
+   int xPos, yPos, size = 35;
+   boolean isOccupied;
+   color[] colors = { 255, #ff0000 };
+   Tile(int xPos, int yPos) {
+      this.xPos = xPos;
+      this.yPos = yPos;
+      this.isOccupied = false;
+   }
+   
+   void toggle() {
+     isOccupied = !isOccupied;
+   }
+   
+   void paint() {
+     color currentColor = isOccupied ? colors[1] : colors[0];
+     fill(currentColor);
+     rect(this.xPos,this.yPos,size,size);
+   }
+   
+}
 
 class SCORE {
   float xPos, yPos, scoreWidth, scoreHeight;
