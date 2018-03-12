@@ -2,7 +2,9 @@
 PlayArea playArea;
 UILAYOUT uiScreen;
 SCORE displayScore;
-
+NextShape uiNextShape;
+Level uiLevel;
+Lines uiLines;
 
 //********** VARIABLES **********/
 // 0 is for the Initial Screen
@@ -26,6 +28,9 @@ void setup () {
   playArea = new PlayArea(TILES_PER_ROW,TILES_PER_COLUMN,TILE_LENGTH);
   uiScreen = new UILAYOUT();
   displayScore = new SCORE();
+  uiNextShape = new NextShape();
+  uiLevel = new Level();
+  uiLines = new Lines();
 }
 
 
@@ -35,7 +40,7 @@ void draw() {
   if (gameScreen == 0) {
     initScreen();
     textFont(f, 56);
-    fill(0);
+    fill(255);
     text("Welcome to Our Future", 375, 500);
     textFont(f,32);
     text("Click anywhere to start", 375, 600);
@@ -50,8 +55,8 @@ void draw() {
 void initScreen() {
   background (bg);
   textAlign (CENTER);
-  text ("Click to start, homie.", height, width);
   }
+  
 void gameScreen() {
   background (0);
   // Next blocks will test movement of tile
@@ -61,7 +66,16 @@ void gameScreen() {
   uiScreen.paint();
   displayScore.paint();
   textFont(f, 32);
-  text("FUCKIN SCORE",100,100);
+  text("SCORE", 620, 49);
+  uiNextShape.paint();
+  textFont(f, 32);
+  text("NEXT SHAPE", 620, 224);
+  uiLevel.paint();
+  textFont(f, 32);
+  text("LEVEL", 620, 499);
+  uiLines.paint();
+  textFont(f, 32);
+  text("LINES", 620, 599);
 }
 
 void gameOverScreen() {
@@ -129,7 +143,7 @@ class PlayArea {
       int x = 0;
       int y = 0;
       fill(255);
-      //for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 25; i++) {
           for (int j = 0; j < 15; j++) {
             rect(x,y,tileSize,tileSize);
             x+=tileSize;
@@ -137,11 +151,13 @@ class PlayArea {
 
    }
 }
+}
+
 
 class SCORE {
   float xPos, yPos, scoreWidth, scoreHeight;
   SCORE() {
-    this.xPos = 550;
+    this.xPos = 545;
     this.yPos = 50;
     this.scoreWidth = 150;
     this.scoreHeight = 50;
@@ -150,5 +166,50 @@ class SCORE {
   void paint() {
     fill(255);
     rect(this.xPos, this.yPos, this.scoreWidth, this.scoreHeight);
+  }
+}
+
+class NextShape {
+  float xPos, yPos, uiWidth, uiHeight;
+  NextShape() {
+    this.xPos = 500;
+    this.yPos = 225;
+    this.uiWidth = 240;
+    this.uiHeight = 200;
+  }
+  
+  void paint() {
+    fill(255);
+    rect(xPos, yPos, uiWidth, uiHeight);
+  }
+}
+
+class Level {
+  float xPos, yPos, uiWidth, uiHeight;
+  Level() {
+    this.xPos = 500;
+    this.yPos = 500;
+    this.uiWidth = 240;
+    this.uiHeight = 50;
+  }
+  
+  void paint() {
+    fill(255);
+    rect(xPos, yPos, uiWidth, uiHeight);
+  }
+}
+
+class Lines {
+  float xPos, yPos, uiWidth, uiHeight;
+  Lines() {
+    this.xPos = 500;
+    this.yPos = 600;
+    this.uiWidth = 240;
+    this.uiHeight = 50;
+  }
+  
+  void paint() {
+    fill(255);
+    rect(xPos, yPos, uiWidth, uiHeight);
   }
 }
