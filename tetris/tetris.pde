@@ -1,3 +1,4 @@
+
 //********** DEFINE IN MEMORY **********/
 PlayArea playArea;
 UILAYOUT uiScreen;
@@ -5,6 +6,7 @@ SCORE displayScore;
 NextShape uiNextShape;
 Level uiLevel;
 Lines uiLines;
+
 
 //********** VARIABLES **********/
 // 0 is for the Initial Screen
@@ -25,7 +27,7 @@ void setup () {
   final int TILE_LENGTH = 35;
   final int TILES_PER_ROW = BOARD_WIDTH / TILE_LENGTH; // 525 / 35 == 15
   final int TILES_PER_COLUMN = BOARD_HEIGHT / TILE_LENGTH; // 875 / 35 = 25
-  playArea = new PlayArea(TILES_PER_ROW,TILES_PER_COLUMN,TILE_LENGTH);
+  playArea = new PlayArea(TILES_PER_COLUMN,TILES_PER_ROW,TILE_LENGTH);
   uiScreen = new UILAYOUT();
   displayScore = new SCORE();
   uiNextShape = new NextShape();
@@ -117,16 +119,16 @@ class UILAYOUT {
 
 class PlayArea {
   int[][] logic;
-  int rowSize, columnSize, tileSize;
-    PlayArea(int rowSize, int columnSize,int tileSize) {
-     logic = new int[rowSize][columnSize]; 
-     this.rowSize = rowSize;
-     this.columnSize = columnSize;
+  int numBoxesInRow, numBoxesInColumn, tileSize;
+    PlayArea(int numBoxesInRow, int numBoxesInColumn,int tileSize) {
+     logic = new int[numBoxesInRow][numBoxesInColumn]; 
+     this.numBoxesInRow = numBoxesInRow;
+     this.numBoxesInColumn = numBoxesInColumn;
      this.tileSize = tileSize;
-     println("Row size is " + this.rowSize);
-     println("Column size is " + this.columnSize);
-     for (int i = 0; i < this.rowSize; i++) {
-       for (int j = 0; j < this.columnSize; j++) {
+     println("Row size is " + this.numBoxesInColumn);
+     println("Column size is " + this.numBoxesInRow);
+     for (int i = 0; i < this.numBoxesInRow; i++) {
+       for (int j = 0; j < this.numBoxesInColumn; j++) {
          logic[i][j] = 0;
          println("logic item [" + i + "][" + j + "] is set to 0");
         }
@@ -143,14 +145,15 @@ class PlayArea {
       int x = 0;
       int y = 0;
       fill(255);
-        for (int i = 0; i < 25; i++) {
-          for (int j = 0; j < 15; j++) {
+        for (int i = 0; i < this.numBoxesInRow; i++) {
+          for (int j = 0; j < this.numBoxesInColumn; j++) {
             rect(x,y,tileSize,tileSize);
             x+=tileSize;
           }
-
+          x = 0;
+          y+=tileSize;
+        }
    }
-}
 }
 
 
